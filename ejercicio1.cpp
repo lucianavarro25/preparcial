@@ -67,7 +67,8 @@ void registrarVehiculo(Vehiculo estacionamiento[], int capacidad,
         }
     }
 
-    cout << "AVISO: Estacionamiento lleno." << endl;
+    cout << "ERROR: Estacionamiento lleno." << endl;
+
 }
 
 
