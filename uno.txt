@@ -1,0 +1,31 @@
+Sistema de estacionamiento
+Una empresa administra un estacionamiento con capacidad limitada para vehículos.
+De cada vehículo se necesita registrar información como su placa, tipo de vehículo,
+hora de entrada y estado actual dentro del estacionamiento.
+El programa debe permitir registrar nuevos vehículos siempre que existan espacios
+disponibles. También debe permitir registrar la salida de un vehículo, localizar un
+vehículo mediante su placa y consultar el estado actual del estacionamiento.
+Al finalizar, el sistema deberá mostrar cuántos espacios están ocupados, cuántos
+están libres y cuál es el porcentaje de ocupación. No debe ser posible registrar dos
+vehículos con la misma placa simultáneamente
+
+-------
+pide que cada vehiculo tengamos:
+- placa
+-tipo de vehiculo
+-hora de entrada
+-estado actual
+*estoo traducido es un struct
+
+y como el estacionamiento tiene un limite
+*esto pide un array
+
+¿que necesita el programa?
+
+1. registrar vehiculo
+2. registrar salida
+3. buscar vehiculo
+4. mostrar estacionamiento
+5. mostrar estaditistica
+
+*esto se traduce a una funcion cada numero
