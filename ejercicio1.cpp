@@ -115,7 +115,27 @@ void registrarSalida(Vehiculo estacionamiento[], int capacidad,
 
     cout << "Salida registrada correctamente." << endl;
 }
+// MOSTRAR ESTADISTICAS
+void mostrarEstadisticas(Vehiculo estacionamiento[], int capacidad) {
 
+    int ocupados = 0;
+
+    // Contar espacios ocupados
+    for (int i = 0; i < capacidad; i++) {
+
+        if (estacionamiento[i].activo) {
+            ocupados++;
+        }
+    }
+
+    int libres = capacidad - ocupados;
+
+    double porcentaje = (ocupados * 100.0) / capacidad;
+
+    cout << "Espacios ocupados: " << ocupados << endl;
+    cout << "Espacios libres: " << libres << endl;
+    cout << "Porcentaje de ocupacion: " << porcentaje << "%" << endl;
+}
 
 // MAIN
 int main() {
@@ -126,12 +146,15 @@ int main() {
         estacionamiento[i].activo = false;
     }
 
-    char placa[] = "ABC123";
-    char tipo[] = "Carro";
+    char placa1[] = "ABC123";
+    char tipo1[] = "Carro";
 
-    registrarVehiculo(estacionamiento, 3, placa, tipo, 8);
+    char placa2[] = "XYZ789";
+    char tipo2[] = "Moto";
 
-    registrarSalida(estacionamiento, 3, placa);
+    registrarVehiculo(estacionamiento, 3, placa1, tipo1, 8);
+    registrarVehiculo(estacionamiento, 3, placa2, tipo2, 9);
 
+    mostrarEstadisticas(estacionamiento, 3);
     return 0;
 }
