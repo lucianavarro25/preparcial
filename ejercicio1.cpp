@@ -1,25 +1,27 @@
 #include <iostream>
+
 using namespace std;
 
-
-struct vehiculo{
+struct Vehiculo {
     char placa[10];
     char tipo[20];
     int horaEntrada;
     bool activo;
 };
+
+// REGISTRAR VEHICULO
 void registrarVehiculo(Vehiculo estacionamiento[], int capacidad,
                        char placa[], char tipo[], int hora) {
 
-    // Primero verificamos si la placa ya existe
-
+    // Verificar si la placa ya existe
     for (int i = 0; i < capacidad; i++) {
 
         if (estacionamiento[i].activo) {
 
             bool iguales = true;
 
-            for (int j = 0; placa[j] != '\0' || estacionamiento[i].placa[j] != '\0'; j++) {
+            for (int j = 0; placa[j] != '\0' ||
+                 estacionamiento[i].placa[j] != '\0'; j++) {
 
                 if (placa[j] != estacionamiento[i].placa[j]) {
                     iguales = false;
@@ -28,12 +30,50 @@ void registrarVehiculo(Vehiculo estacionamiento[], int capacidad,
             }
 
             if (iguales) {
-                cout << "Ya existe un vehiculo con esa placa.\n";
+                cout << "Ya existe un vehiculo con esa placa." << endl;
                 return;
             }
         }
     }
-int buscarVehiculo(Vehiculo estacionamiento[], int capacidad, char placa[]) {
+
+    // Buscar un espacio libre
+    for (int i = 0; i < capacidad; i++) {
+
+        if (!estacionamiento[i].activo) {
+
+            int j = 0;
+
+            while (placa[j] != '\0') {
+                estacionamiento[i].placa[j] = placa[j];
+                j++;
+            }
+
+            estacionamiento[i].placa[j] = '\0';
+
+            j = 0;
+
+            while (tipo[j] != '\0') {
+                estacionamiento[i].tipo[j] = tipo[j];
+                j++;
+            }
+
+            estacionamiento[i].tipo[j] = '\0';
+
+            estacionamiento[i].horaEntrada = hora;
+            estacionamiento[i].activo = true;
+
+            cout << "Vehiculo registrado correctamente." << endl;
+            return;
+        }
+    }
+
+    cout << "Estacionamiento lleno." << endl;
+}
+
+
+// BUSCAR VEHICULO
+int buscarVehiculo(Vehiculo estacionamiento[], int capacidad,
+                   char placa[]) {
 
     for (int i = 0; i < capacidad; i++) {
 
@@ -41,7 +81,8 @@ int buscarVehiculo(Vehiculo estacionamiento[], int capacidad, char placa[]) {
 
             bool iguales = true;
 
-            for (int j = 0; placa[j] != '\0' || estacionamiento[i].placa[j] != '\0'; j++) {
+            for (int j = 0; placa[j] != '\0' ||
+                 estacionamiento[i].placa[j] != '\0'; j++) {
 
                 if (estacionamiento[i].placa[j] != placa[j]) {
                     iguales = false;
@@ -57,39 +98,40 @@ int buscarVehiculo(Vehiculo estacionamiento[], int capacidad, char placa[]) {
 
     return -1;
 }
-    // Buscamos un espacio libre
 
-    for (int i = 0; i < capacidad; i++) {
 
-        if (!estacionamiento[i].activo) {
+// REGISTRAR SALIDA
+void registrarSalida(Vehiculo estacionamiento[], int capacidad,
+                     char placa[]) {
 
-            int j = 0;
+    int posicion = buscarVehiculo(estacionamiento, capacidad, placa);
 
-            while (placa[j] != '\0') {
-                estacionamiento[i].placa[j] = placa[j];
-                j++;
-            }
-            estacionamiento[i].placa[j] = '\0';
-
-            j = 0;
-
-            while (tipo[j] != '\0') {
-                estacionamiento[i].tipo[j] = tipo[j];
-                j++;
-            }
-            estacionamiento[i].tipo[j] = '\0';
-
-            estacionamiento[i].horaEntrada = hora;
-            estacionamiento[i].activo = true;
-
-            cout << "Vehiculo registrado correctamente.\n";
-            return;
-        }
+    if (posicion == -1) {
+        cout << "Vehiculo no encontrado." << endl;
+        return;
     }
 
-    cout << "Estacionamiento lleno.\n";
-}
-int main(){
-    return 0;
+    estacionamiento[posicion].activo = false;
+
+    cout << "Salida registrada correctamente." << endl;
 }
 
+
+// MAIN
+int main() {
+
+     Vehiculo estacionamiento[3];
+
+    for (int i = 0; i < 3; i++) {
+        estacionamiento[i].activo = false;
+    }
+
+    char placa[] = "ABC123";
+    char tipo[] = "Carro";
+
+    registrarVehiculo(estacionamiento, 3, placa, tipo, 8);
+
+    registrarSalida(estacionamiento, 3, placa);
+
+    return 0;
+}
